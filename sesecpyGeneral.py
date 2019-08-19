@@ -68,8 +68,11 @@ class sesecpyGeneral():
                     #subprocess call -> output of subprocess can be seen directly
                     returnv = self.executeSubprocess(self, [pythoncall, "main.py", modelfolder, dmas])
                     returnv = "\r\n".join(returnv)
-                    resultfile = returnv[returnv.find("RESULTFILE: ")+12:]
-                    print("\nThe execution process has finished. Results are placed in the file\n" + resultfile + "\n")
+                    if "SESEuPy has finished all work." in returnv:
+                        resultfile = returnv[returnv.find("RESULTFILE: ")+12:]
+                        print("\nThe execution process has finished. Results are placed in the file\n" + resultfile + "\n")
+                    else:
+                        resultfile = ""
                     return resultfile
                 else:
                     #do nothing if the model(s) could not be built
@@ -88,14 +91,16 @@ class sesecpyGeneral():
             return "", ret
 
     #calculate the path and filenames of PES and FPES based on the SES and the sesvars
-    def findPESFPESNames(self, sesFilePath, sesvars):
+    def findPESFPESNames(self, sesFilePath, sesvars, simulationNumber):
         sesFilePathParts = sesFilePath.split("\\")
         baseSESFilePath = "\\".join(sesFilePathParts[:-1])
         sesFileName = sesFilePathParts[-1]
-        sesvars = sesvars[1:-1] #prepare the SES variables for updating the PES name
-        sesvarlist = sesvars.split(",")
-        pesFileName = splitext(sesFileName)[0] + "_p_" + "_".join(sesvarlist) + ".jsonsestree"
-        pesFileName = pesFileName.replace("=", "e")
+        #sesvars = sesvars[1:-1] #prepare the SES variables for updating the PES name
+        #sesvarlist = sesvars.split(",")
+        #sesvarlist = [x.strip(' ') for x in sesvarlist]
+        #pesFileName = splitext(sesFileName)[0] + "_p_" + "_".join(sesvarlist) + ".jsonsestree"
+        #pesFileName = pesFileName.replace("=", "e").replace("'","").replace('"', '')
+        pesFileName = splitext(sesFileName)[0] + "_p_simNum" + str(simulationNumber) + ".jsonsestree"
         fpesFileName = splitext(pesFileName)[0] + "_f" + ".jsonsestree"
         pesFilePath = os.path.join(baseSESFilePath, pesFileName)
         fpesFilePath = os.path.join(baseSESFilePath, fpesFileName)
