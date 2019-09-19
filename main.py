@@ -61,14 +61,15 @@ while loopCounter < loopMax and not goalsMet and not errorOcc:
         for hfile in os.listdir(usedMB):
             hfilepathname = os.path.join(usedMB, hfile)
             newhfilepathname = os.path.join(os.path.split(sesFilePath)[0], hfile)
-            try:
-                if os.path.isdir(hfilepathname):
-                    shutil.copytree(hfilepathname, newhfilepathname)
-                else:
-                    shutil.copyfile(hfilepathname, newhfilepathname)
-            except:
-                print("Error copying the MB file(s) in the directory with the SES file!")
-            addedMbFiles.append(newhfilepathname)
+            if not os.path.exists(newhfilepathname):
+                try:
+                    if os.path.isdir(hfilepathname):
+                        shutil.copytree(hfilepathname, newhfilepathname)
+                    else:
+                        shutil.copyfile(hfilepathname, newhfilepathname)
+                except:
+                    print("Error copying the MB file(s) in the directory with the SES file!")
+                addedMbFiles.append(newhfilepathname)
 
         resultfile = sesecpyGeneralObject.executeToolchain(sesecpyGeneral, infrastructurePath, pythoncall, sesFilePath, sesvars, pesFilePath, fpesFilePath, deletePES, deleteFPES, deleteModelsAfterSimulation, appendConfig)
         if resultfile == "":
