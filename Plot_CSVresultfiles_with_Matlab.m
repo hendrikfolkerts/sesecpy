@@ -1,5 +1,6 @@
 clc
 clear all
+close all
 
 %files to plot as cell array
 files = {'Feedback_p_simNum0_f_models.csv', ...
@@ -48,7 +49,7 @@ for f=1:length(files)
             end
         end
     end
-    %everything now in the variable "plots"
+    %headers now in the variable "plotsheaders" and data in the variable "plots"
 
     %%plot
     figure('Name',files{f},'OuterPosition', [1, 1, 500, 600]);
@@ -69,13 +70,18 @@ for f=1:length(files)
             end
             legendsentries{j-1} = strrep(plotsheaders{i}(3,j),'_',' ');
         end
+        %add title/labels
         ylabel(ylabelstring)
         xlabel(strrep(plotsheaders{i}(3,1),'_',' '))
         titletext = strrep(plotsheaders{i}(1,1),'_',' ');
         titletext = erase(titletext,'.mo');
         titletext = erase(titletext,'.m');
         title(titletext)
+        %add legend, sesvars, and parameterization
         legend(legendsentries,'Location','northeast','Orientation','vertical')
+        text(0.05,0.6,plotsheaders{i}(2,end),'Units','Normalized' )
+        text(0.5,0.5,extractAfter(plotsheaders{i}(2,1), 'parameterization: '),'Units','Normalized' )
+        %grid
         grid minor
         hold off
     end
