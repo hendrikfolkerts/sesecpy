@@ -45,11 +45,18 @@ while loopCounter < loopMax and not goalsMet and not errorOcc:
     #calculate the next SESvars -> experiment specific
     goalsMet, sesvars, pesFilePath, fpesFilePath, simulator, interface, appendConfig, overallResults = sesecpyExperimentObject.nextState(sesecpyExperiment, resultfile, loopCounter)  # the loopCounter is the simulation number
 
+    if system != "Windows":
+        pesFilePath = pesFilePath.replace("\\", "/")
+        fpesFilePath = fpesFilePath.replace("\\", "/")
+
     #select the sesfile depending on the interface -> only do in the first loop, then it is set
     if loopCounter == 0 and interface == "native":
         sesFilePath = sesFilePath.get("native")
     elif loopCounter == 0 and interface == "FMI":
         sesFilePath = sesFilePath.get("FMI")
+
+    if system != "Windows":
+        sesFilePath = sesFilePath.replace("\\", "/")
 
     #execute the prune, flatten, build and execute toolchain if the goals are not met yet -> general
     if not goalsMet:
@@ -58,6 +65,10 @@ while loopCounter < loopMax and not goalsMet and not errorOcc:
             usedMB = mbFilespath.get(simulator)
         else:                       #for FMI -> copy the only MB (for all simulators)
             usedMB = mbFilespath.get(interface)
+
+        if system != "Windows":
+            usedMB = usedMB.replace("\\", "/")
+
         for hfile in os.listdir(usedMB):
             hfilepathname = os.path.join(usedMB, hfile)
             newhfilepathname = os.path.join(os.path.split(sesFilePath)[0], hfile)
