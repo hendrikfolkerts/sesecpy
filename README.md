@@ -16,15 +16,15 @@ EXECUTE
 
 Copy SESToPy, SESMoPy, SESEuPy, and SESEcPy in one directory like shown below.
 
-SESMB_Infrastructure
-    |
-     - SESEcPy
-    |
-     - SESEuPy
-    |
-     - SESMoPy
-    |
-     - SESToPy
+SESMB_Infrastructure  
+    |  
+     -- SESEcPy  
+    |  
+     -- SESEuPy  
+    |  
+     -- SESMoPy  
+    |  
+     -- SESToPy
 
 Copy the directory SESMB_Infrastructure in your home folder, e.g. C:\Users\<Username>
 Go in the SESEcPy folder. 
