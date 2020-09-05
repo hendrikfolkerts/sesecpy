@@ -42,7 +42,7 @@ command:
 CHANGELOG
 
 
-ToDo, Known Bugs, Notes
+KNOWN BUGS, NOTES, TODO
 
 
 LICENSE
