@@ -30,11 +30,11 @@ Copy the directory SESMB_Infrastructure in your home folder, e.g. C:\Users\\\<Us
 (necessary for usage of Dymola as simulator, otherwise Dymola cannot simulate).
 Make sure, that the commands "omc", "matlab", and "dymola" are on the path and the
 programs are thus startable from the shell (depending on which simulator you want
-to use). This is described in the documentation of SESEuPy in detail.
-Open a shell and change with the cd command in the SESEcPy directory. 
+to use). This is described in the documentation of SESEuPy in detail.  
 The program can be executed from source. Python3 needs to be installed and the
-Python executable needs to be on the path. The program then can be started with
-the shell command:
+Python executable needs to be on the path. Open a shell and change with the cd
+command to the SESEcPy directory. The program then can be started with the shell
+command:
 - in Windows: python main.py
 - in Linux: python3 main.py
 
