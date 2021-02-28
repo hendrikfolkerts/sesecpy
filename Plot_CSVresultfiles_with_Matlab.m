@@ -2,6 +2,9 @@ clc
 clear all
 close all
 
+%use software-opengl if the plots are unreadable
+opengl software
+
 %files to plot as cell array
 files = {'Feedback_p_simNum0_f_models.csv', ...
          'Feedback_p_simNum1_f_models.csv', ...
